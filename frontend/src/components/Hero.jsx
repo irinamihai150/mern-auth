@@ -1,5 +1,5 @@
 import { Container, Card, Button } from "react-bootstrap"
-import React from "react"
+import { LinkContainer } from "react-router-bootstrap"
 
 const Hero = () => {
 	return (
@@ -11,12 +11,12 @@ const Hero = () => {
 						This is a boiler plate for mern auth
 					</p>
 					<div className='d-flex'>
-						<Button variant='primary' href='./login'>
-							Sign in
-						</Button>
-						<Button variant='secondary' href='./register'>
-							Sign Up
-						</Button>
+						<LinkContainer to='./login'>
+							<Button variant='primary'>Sign in</Button>
+						</LinkContainer>
+						<LinkContainer to='./register'>
+							<Button variant='secondary'>Sign Up</Button>
+						</LinkContainer>
 					</div>
 				</Card>
 			</Container>
