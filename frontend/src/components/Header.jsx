@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useLogoutMutation } from "../slices/usersApiSlice"
 import { logout } from "../slices/authSlice"
 import { LinkContainer } from "react-router-bootstrap"
+
 const Header = () => {
 	const { userInfo } = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
@@ -22,10 +23,10 @@ const Header = () => {
 	}
 	return (
 		<header>
-			<Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+			<Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
 				<Container>
 					<LinkContainer to='/'>
-						<Navbar.Brand>Mern app</Navbar.Brand>
+						<Navbar.Brand>Journal app</Navbar.Brand>
 					</LinkContainer>
 
 					<Navbar.Toggle aria-controls='basic-navbar-nav'></Navbar.Toggle>
