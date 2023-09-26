@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import FormContainer from "../components/FormContainer"
 import { useLoginMutation } from "../slices/usersApiSlice"
 import { setCredentials } from "../slices/authSlice"
-
+import { toast } from "react-toastify"
 const LoginScreen = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -14,7 +14,7 @@ const LoginScreen = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const [login, { isLoading }] = useLoginMutation()
+	const [login] = useLoginMutation()
 
 	const { userInfo } = useSelector((state) => state.auth)
 
@@ -26,14 +26,16 @@ const LoginScreen = () => {
 
 	const submitHandler = async (e) => {
 		e.preventDefault()
+		console.log("Submit button clicked")
 		try {
 			const res = await login({ email, password }).unwrap()
+			console.log("Login successful", res)
 			dispatch(setCredentials({ ...res }))
 			navigate("/")
 		} catch (err) {
-			console.error(err)
+			console.error("Login error", err)
+			toast.error(err?.data.message || err.error)
 		}
-		console.log("hello")
 	}
 	return (
 		<FormContainer>
@@ -63,7 +65,7 @@ const LoginScreen = () => {
 				</Button>
 				<Row>
 					<Col>
-						New Customer ? <Link to='./register'>Register</Link>
+						New Customer ? <Link to='/register'>Register</Link>
 					</Col>
 				</Row>
 			</Form>

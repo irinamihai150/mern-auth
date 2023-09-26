@@ -11,10 +11,10 @@ const Hero = () => {
 						This is a boiler plate for mern auth
 					</p>
 					<div className='d-flex'>
-						<LinkContainer to='./login'>
+						<LinkContainer to='/login'>
 							<Button variant='primary'>Sign in</Button>
 						</LinkContainer>
-						<LinkContainer to='./register'>
+						<LinkContainer to='/register'>
 							<Button variant='secondary'>Sign Up</Button>
 						</LinkContainer>
 					</div>

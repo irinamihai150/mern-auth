@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Form, Button, Row, Col } from "react-bootstrap"
 import FormContainer from "../components/FormContainer"
@@ -59,7 +59,7 @@ const RegisterScreen = () => {
 				</Button>
 				<Row>
 					<Col>
-						Already have an account ? <Link to='./login'>Login</Link>
+						Already have an account ? <Link to='/login'>Login</Link>
 					</Col>
 				</Row>
 			</Form>
