@@ -7,6 +7,7 @@ import FormContainer from "../components/FormContainer"
 import { useLoginMutation } from "../slices/usersApiSlice"
 import { setCredentials } from "../slices/authSlice"
 import { toast } from "react-toastify"
+import Loader from "../components/Loader"
 const LoginScreen = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
@@ -14,7 +15,7 @@ const LoginScreen = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const [login] = useLoginMutation()
+	const [login, { isLoading }] = useLoginMutation()
 
 	const { userInfo } = useSelector((state) => state.auth)
 
@@ -26,14 +27,13 @@ const LoginScreen = () => {
 
 	const submitHandler = async (e) => {
 		e.preventDefault()
-		console.log("Submit button clicked")
 		try {
 			const res = await login({ email, password }).unwrap()
-			console.log("Login successful", res)
+		
 			dispatch(setCredentials({ ...res }))
 			navigate("/")
 		} catch (err) {
-			console.error("Login error", err)
+	
 			toast.error(err?.data.message || err.error)
 		}
 	}
@@ -60,6 +60,7 @@ const LoginScreen = () => {
 						onChange={(e) => setPassword(e.target.value)}
 					></Form.Control>
 				</Form.Group>
+				{isLoading && <Loader />}
 				<Button type='submit' variant='primary' className='mt-3'>
 					Sign in
 				</Button>
