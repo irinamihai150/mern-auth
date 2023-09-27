@@ -23,7 +23,7 @@
 		"mongoose": "^7.5.1"
 	},
 	"engines": {
-		"node": ">=4.20.1"
+		"node": ">=14.20.1"
 	},
 	"devDependencies": {
 		"concurrently": "^8.2.1",
