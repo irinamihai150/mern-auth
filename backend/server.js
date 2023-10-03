@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 dotenv.config()
 import cookieParser from "cookie-parser"
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
+import noteRoutes from "./routes/noteRoutes.js"
 
 import connectDB from "./config/db.js"
 const port = process.env.PORT || 5000
@@ -11,11 +12,20 @@ const port = process.env.PORT || 5000
 import userRoutes from "./routes/userRoutes.js"
 connectDB()
 const app = express()
+import cors from "cors"
+app.use(cors())
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		credentials: true,
+	})
+)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use("/api/users", userRoutes)
+app.use("/api/notes", noteRoutes)
 
 if (process.env.NODE_ENV === "production") {
 	const __dirname = path.resolve()
@@ -35,9 +45,3 @@ app.use(errorHandler)
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`)
 })
-
-//POST /api/users - register a user
-//POST /api/users/auth authenticate a user and get a token
-//POST /api/users/logout log out and clear cookies
-//Get /api/users/users/profile get a user profile
-//Put /api/users/profile update a user profile
